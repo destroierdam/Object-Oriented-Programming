@@ -1,17 +1,27 @@
-#include "pch.h"
 #include <iostream>
 #include <cstring>
 
 class String
 {
 private:
+	// Pointer, that will hold the address of the dynamically allocated array
 	char* str;
+	
+	// Holds the real size of the string 
 	size_t size;
+	
+	// Holds the length of the array; must be >= size
 	size_t CAPACITY;
 
+	// makes the array twice as big by 
+	// allocating bigger chunk of memory, 
+	// copying the current string in the new array, 
+	// deleting the smaller array and
+	// 
 	void resize()
 	{
 		this->CAPACITY = CAPACITY * 2;
+		
 		char *tmp = str;
 		str = new char[CAPACITY];
 		strcpy_s(this->str, size + 1, tmp);
