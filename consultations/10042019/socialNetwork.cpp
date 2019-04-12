@@ -18,8 +18,10 @@ private:
 	char password[32];
 
 public:
+	// Default constructor
 	Person();
 	Person(const char*, double, int, double, bool, const char*, const char*);
+	// Overloading relational operators; const => doesn't change the caller's data
 	bool operator==(const Person& other) const;
 	bool operator!=(const Person& other) const;
 	bool operator>(const Person& other) const;
@@ -42,10 +44,13 @@ bool Person::operator<=(const Person& other) const
 
 bool Person::operator>(const Person& other) const // >, +,-, >= .. bind with left object
 {
+	// If the ages are equal, 
 	if (this->age == other.age)
 	{
+		// If the height is equal,
 		if (this->height == other.height)
 		{
+			// Compare by weight
 			return this->weight > other.weight;
 		}
 		return this->height > other.height;
@@ -60,6 +65,7 @@ bool Person::operator<(const Person& other) const
 
 Person::Person()
 {
+	// Set default values for Person's data
 	this->name[0] = '\0';
 	this->height = 0;
 	this->age = 0;
@@ -68,6 +74,7 @@ Person::Person()
 	this->username[0] = '\0';
 	this->password[0] = '\0';
 }
+// Constructor with parameters; gives Person info about him
 Person::Person(const char* _name, double _height, int _age,
 	double _weight, bool _gender, const char* _username, const char* _password)
 {
@@ -97,33 +104,50 @@ bool Person::operator!=(const Person& other) const
 class SocialNetwork
 {
 private:
+	// Array of Person's; dynamically allocated
 	Person* users;
+	// Stores the actual number of people in the social network
 	size_t size;
+	// Stores the number of people that we have allocated; the real size of the array "users"
 	size_t capacity;
 
+	// Copies the values of other into this; allocates necessarry memory
 	void copy(const SocialNetwork& other);
+	// Deletes the dynamically allocated array
 	void erase();
+	// Increases the size of array "users" dynamically
 	void resize();
 	
 	
 public:
+	// Goliama chetvorka
+	// Default constructor
 	SocialNetwork();
+	// Copy constructor
 	SocialNetwork(const SocialNetwork& other);
+	// Operator =
 	SocialNetwork& operator=(const SocialNetwork& other);
+	// Destructor
 	~SocialNetwork();
 
+	// Adds a person to the social network
 	void push(const Person& newPerson);
+	// Checks whether a person is already in the network
 	bool includes(const Person& newPerson);
 	void removePerson(const Person& findPerson);
 };
 
 void SocialNetwork::removePerson(const Person& findPerson)
 {
+	// Go through all Persons in users
 	for (size_t i = 0; i < size; i++)
 	{
+		// If you find the person you are looking for
 		if (findPerson == users[i])
 		{
+			// Overwrite it with the last person
 			users[i] = users[size];
+			// Decrease the size of the array
 			--size;
 			return;
 		}
