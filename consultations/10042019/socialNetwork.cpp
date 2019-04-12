@@ -153,8 +153,8 @@ void SocialNetwork::removePerson(const Person& findPerson)
 		}
 	}
 }
- 
-bool SocialNetwork::includes(const Person& newPerson) // Check if a person is in a database
+// Returns true if newPerson is found in users
+bool SocialNetwork::includes(const Person& newPerson) 
 {
 	for (size_t i = 0; i < size; i++)
 	{
@@ -165,30 +165,35 @@ bool SocialNetwork::includes(const Person& newPerson) // Check if a person is in
 	}
 	return false;
 }
-
+// Adds a person to users
 void SocialNetwork::push(const Person& newPerson)
 {
+	// If we don't have enough space
 	if (size == capacity)
 	{
 		resize();
 	}
-	
+	// Add newPerson to the end of the list
 	users[size] = newPerson;
+	
 	size++;
 }
 
 void SocialNetwork::resize() // Alternative to the one used with String
 {
+	// Double the capacity
 	this->capacity *= 2;
-	
+	// Create a temporary pointer; allocate new memory
 	Person* temp = new Person[capacity];
 
+	// Copy the current users into the new memory
 	for (size_t i = 0; i < this->size; i++)
 	{
 		temp[i] = this->users[i];
 	}
-	
+	// Delete old array
 	delete[] this->users;
+	// Make users point to the new array
 	this->users = temp;
 }
 
