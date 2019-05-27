@@ -7,22 +7,6 @@
 #include "MFU.h"
 #include "Office.h"
 #include <algorithm>
-/*
-struct Vector {
-	double x;
-	double y;
-	Vector(double _x, double _y) {
-		this->x = _x;
-		this->y = _y;
-	}
-	bool operator < (const Vector & other)
-	{
-	}
-};
-bool compareVector(Vector lhs, Vector rhs) {
-	return lhs.x < rhs.x ? true : false;
-}
-*/
 
 void testElectricalOutlet(Powerable * powerTool) {
 	std::cout << "Testing..." << std::endl;
